@@ -3,6 +3,7 @@ const app = express();
 const path = require('path');
 const { spawn } = require('child_process');
 const bodyParser = require("body-parser");
+const fs = require('fs');
 
 app.use(bodyParser.json());
 
@@ -11,6 +12,15 @@ app.use(express.json());
 app.use(express.static("public"));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+
+app.get('/home', (req, res) => {
+  res.render('home');
+});
+
+app.get('/about', (req, res) => {
+  res.render('about');
+});
 
 app.get('/form', (req, res) => {
   res.render('form');
