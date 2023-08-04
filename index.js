@@ -14,6 +14,10 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 
+app.get('/w_q_c', (req, res) => {
+  res.render('w_q_c');
+});
+
 app.get('/home', (req, res) => {
   res.render('home');
 });
