@@ -18,6 +18,7 @@ app.get('/w_q_c', (req, res) => {
   res.render('w_q_c');
 });
 
+
 app.get('/home', (req, res) => {
   res.render('home');
 });
@@ -60,6 +61,17 @@ app.post('/predict', (req, res) => {
       res.status(500).json({ error: 'An error occurred. Please try again later.' });
     }
   });
+});
+
+
+app.get('/data_set', (req, res) => {
+  const csvFilePath = 'data/water_potability2.csv';
+
+  // Read the CSV file using fs.readFileSync
+  const csvData = fs.readFileSync(csvFilePath, 'utf-8');
+
+  // Pass the CSV data to the EJS template
+  res.render('dataset', { csvData });
 });
 
 app.listen(3000, () => {
