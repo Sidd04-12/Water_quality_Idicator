@@ -16,6 +16,12 @@ app.get('/form', (req, res) => {
   res.render('form');
 });
 
+app.get('/result', (req, res) => {
+  const prediction = req.query.prediction;
+  const message = prediction === '1' ? 'The water is potable.' : 'The water is not potable.';
+  res.render('result', { message });
+});
+
 app.post('/predict', (req, res) => {
   const data = req.body;
 
@@ -34,8 +40,7 @@ app.post('/predict', (req, res) => {
   pythonProcess.on('close', (code) => {
     try {
       const prediction = JSON.parse(result).prediction;
-      const message = prediction === 1 ? 'The water is potable.' : 'The water is not potable.';
-      res.json({ prediction, message });
+      res.json({ prediction }); // Send the prediction as JSON
     } catch (err) {
       console.error('Error:', err);
       res.status(500).json({ error: 'An error occurred. Please try again later.' });

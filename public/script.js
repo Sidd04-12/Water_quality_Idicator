@@ -21,9 +21,8 @@ document.addEventListener('DOMContentLoaded', function () {
     })
       .then(response => response.json())
       .then(result => {
-        const prediction = result.prediction;
-        const message = prediction === 1 ? 'The water is potable.' : 'The water is not potable.';
-        resultDiv.textContent = message;
+        // Redirect to the '/result' page with the prediction message as a URL parameter
+        window.location.href = '/result?prediction=' + result.prediction;
       })
       .catch(error => {
         console.error('Error:', error);
